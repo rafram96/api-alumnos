@@ -5,6 +5,7 @@ provider:
   name: aws
   runtime: python3.13
   timeout: 30  
+  stage: test
   iam:
     role: arn:aws:iam::969784661290:role/LabRole
 
