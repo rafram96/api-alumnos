@@ -1,0 +1,22 @@
+org: rafaelram
+service: api-alumnos
+
+provider:
+  name: aws
+  runtime: python3.13
+  timeout: 30  
+  iam:
+    role: arn:aws:iam::498917627164:role/LabRole
+
+functions:
+  listar:
+    handler: ListarAlumnos.lambda_handler
+    events:
+      - http:
+          path: /alumnos/listar
+          method: post
+          cors: true
+          integration: lambda
+
+
+
