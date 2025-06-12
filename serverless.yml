@@ -6,43 +6,68 @@ provider:
   runtime: python3.13
   timeout: 30  
   iam:
-    role: arn:aws:iam::498917627164:role/LabRole
+    role: arn:aws:iam::969784661290:role/LabRole
+
+# Configuración global de empaquetado
+package:
+  individually: true
+  patterns:
+    - '!**'  # Excluir todos los archivos por defecto
 
 functions:
   listar:
     handler: ListarAlumnos.lambda_handler
+    package:
+      patterns:
+        - ListarAlumnos.py
     events:
       - http:
           path: /alumnos/listar
           method: post
           cors: true
           integration: lambda
+          
   modificar:
     handler: ModificarAlumno.lambda_handler
+    package:
+      patterns:
+        - ModificarAlumno.py
     events:
       - http:
           path: /alumnos/modificar
           method: put
           cors: true
           integration: lambda
+          
   eliminar:
     handler: EliminarAlumno.lambda_handler
+    package:
+      patterns:
+        - EliminarAlumno.py
     events:
       - http:
           path: /alumnos/eliminar
           method: delete
           cors: true
           integration: lambda
+          
   buscar:
     handler: BuscarAlumno.lambda_handler
+    package:
+      patterns:
+        - BuscarAlumno.py
     events:
       - http:
           path: /alumnos/buscar
           method: post
           cors: true
           integration: lambda
+          
   crear:
     handler: CrearAlumno.lambda_handler
+    package:
+      patterns:
+        - CrearAlumno.py
     events:
       - http:
           path: /alumnos/crear
